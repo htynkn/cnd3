@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+    <dubbo:application name="tri-provider"/>
+
+    <dubbo:config-center address="zookeeper://${DUBBO_ZOOKEEPER_ADDRESS:127.0.0.1}:2181"/>
+
+    <dubbo:protocol id="tri" port="-1"/>
+    <dubbo:protocol id="dubbo" port="-1"/>
+
+    <bean id="serviceProvider" class="com.huangyunkun.HelloServiceProvider"/>
+    <dubbo:service interface="com.huangyunkun.IHelloService" ref="serviceProvider"/>
+</beans>

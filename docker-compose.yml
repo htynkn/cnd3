@@ -11,6 +11,18 @@ services:
     environment:
       DUBBO_ZOOKEEPER_ADDRESS: zookeeper
     depends_on:
+      - tri-provider
+  tri-old-consumer:
+    image: htynkn/tri-old-consumer:1.0-SNAPSHOT
+    environment:
+      DUBBO_ZOOKEEPER_ADDRESS: zookeeper
+    depends_on:
+      - tri-provider
+  tri-old-provider:
+    image: htynkn/tri-provider:1.0-SNAPSHOT
+    environment:
+      DUBBO_ZOOKEEPER_ADDRESS: zookeeper
+    depends_on:
       - data-init
   data-init:
     image: htynkn/data-init:1.0-SNAPSHOT
@@ -22,3 +34,8 @@ services:
     image: bitnami/zookeeper:3.7.0
     environment:
       ALLOW_ANONYMOUS_LOGIN: 'yes'
+    healthcheck:
+      test: /opt/bitnami/zookeeper/bin/zkServer.sh print-cmd || exit 1
+      interval: 10s
+      timeout: 3s
+      retries: 5

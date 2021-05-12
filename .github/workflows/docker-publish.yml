@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Login in github packages
-      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com -u htynkn --password-stdin
+      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login https://docker.pkg.github.com -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
     - uses: actions/cache@v2
       with:
         path: ~/.m2/repository
@@ -28,8 +28,8 @@ jobs:
       run: mvn -B package
     - name: Push images
       run: |
-        docker tag htynkn/data-init:1.0-SNAPSHOT docker.pkg.github.com/htynkn/cnd3/data-init:1.0-SNAPSHOT && docker push docker.pkg.github.com/htynkn/cnd3/data-init:1.0-SNAPSHOT
-        docker tag htynkn/tri-consumer:1.0-SNAPSHOT docker.pkg.github.com/htynkn/cnd3/tri-consumer:1.0-SNAPSHOT && docker push docker.pkg.github.com/htynkn/cnd3/tri-consumer:1.0-SNAPSHOT
-        docker tag htynkn/tri-old-consumer:1.0-SNAPSHOT docker.pkg.github.com/htynkn/cnd3/tri-old-consumer:1.0-SNAPSHOT && docker push docker.pkg.github.com/htynkn/cnd3/tri-old-consumer:1.0-SNAPSHOT
-        docker tag htynkn/tri-provider:1.0-SNAPSHOT docker.pkg.github.com/htynkn/cnd3/tri-provider:1.0-SNAPSHOT && docker push docker.pkg.github.com/htynkn/cnd3/tri-provider:1.0-SNAPSHOT
-        docker tag htynkn/tri-old-provider:1.0-SNAPSHOT docker.pkg.github.com/htynkn/cnd3/tri-old-provider:1.0-SNAPSHOT && docker push docker.pkg.github.com/htynkn/cnd3/tri-old-provider:1.0-SNAPSHOT
+        docker push htynkn/data-init:1.0-SNAPSHOT
+        docker push htynkn/tri-consumer:1.0-SNAPSHOT
+        docker push htynkn/tri-old-consumer:1.0-SNAPSHOT
+        docker push htynkn/tri-provider:1.0-SNAPSHOT
+        docker push htynkn/tri-old-provider:1.0-SNAPSHOT

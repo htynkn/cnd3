@@ -27,4 +27,9 @@ jobs:
     - name: Build with Maven
       run: mvn -B package
     - name: Push images
-      run: docker tag htynkn/data-init:1.0-SNAPSHOT docker.pkg.github.com/htynkn/cnd3/data-init:1.0-SNAPSHOT && docker push docker.pkg.github.com/htynkn/cnd3/data-init:1.0-SNAPSHOT
+      run: |
+        docker tag htynkn/data-init:1.0-SNAPSHOT docker.pkg.github.com/htynkn/cnd3/data-init:1.0-SNAPSHOT && docker push docker.pkg.github.com/htynkn/cnd3/data-init:1.0-SNAPSHOT
+        docker tag htynkn/tri-consumer:1.0-SNAPSHOT docker.pkg.github.com/htynkn/cnd3/tri-consumer:1.0-SNAPSHOT && docker push docker.pkg.github.com/htynkn/cnd3/tri-consumer:1.0-SNAPSHOT
+        docker tag htynkn/tri-old-consumer:1.0-SNAPSHOT docker.pkg.github.com/htynkn/cnd3/tri-old-consumer:1.0-SNAPSHOT && docker push docker.pkg.github.com/htynkn/cnd3/tri-old-consumer:1.0-SNAPSHOT
+        docker tag htynkn/tri-provider:1.0-SNAPSHOT docker.pkg.github.com/htynkn/cnd3/tri-provider:1.0-SNAPSHOT && docker push docker.pkg.github.com/htynkn/cnd3/tri-provider:1.0-SNAPSHOT
+        docker tag htynkn/tri-old-provider:1.0-SNAPSHOT docker.pkg.github.com/htynkn/cnd3/tri-old-provider:1.0-SNAPSHOT && docker push docker.pkg.github.com/htynkn/cnd3/tri-old-provider:1.0-SNAPSHOT

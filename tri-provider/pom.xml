@@ -13,11 +13,6 @@
     <name>tri-provider</name>
     <url>http://maven.apache.org</url>
 
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.huangyunkun</groupId>

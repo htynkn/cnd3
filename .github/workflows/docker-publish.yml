@@ -13,6 +13,12 @@ jobs:
     - uses: actions/checkout@v2
     - name: Login in github packages
       run: echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com -u htynkn --password-stdin
+    - uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
     - name: Set up JDK 11
       uses: actions/setup-java@v2
       with:
@@ -21,4 +27,4 @@ jobs:
     - name: Build with Maven
       run: mvn -B package
     - name: Push images
-      run: docker tag htynkn/data-init:1.0.0-SNAPSHOT docker.pkg.github.com/htynkn/cnd3/data-init:1.0.0-SNAPSHOT && docker push docker.pkg.github.com/htynkn/cnd3/data-init:1.0.0-SNAPSHOT
+      run: docker tag htynkn/data-init:1.0-SNAPSHOT docker.pkg.github.com/htynkn/cnd3/data-init:1.0-SNAPSHOT && docker push docker.pkg.github.com/htynkn/cnd3/data-init:1.0-SNAPSHOT

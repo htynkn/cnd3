@@ -11,6 +11,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Login in github packages
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com -u htynkn --password-stdin
     - name: Set up JDK 11
       uses: actions/setup-java@v2
       with:
@@ -18,3 +20,5 @@ jobs:
         distribution: 'adopt'
     - name: Build with Maven
       run: mvn -B package
+    - name: Push images
+      run: docker tag htynkn/data-init:1.0.0-SNAPSHOT docker.pkg.github.com/htynkn/cnd3/data-init:1.0.0-SNAPSHOT && docker push docker.pkg.github.com/htynkn/cnd3/data-init:1.0.0-SNAPSHOT
